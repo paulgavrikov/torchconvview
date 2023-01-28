@@ -31,3 +31,10 @@ def test_PCAView():
     pca_view = PCAView(conv.weight.detach().numpy())
     pca_view.plot_conv()
     pca_view.plot_variance_ratio()
+
+
+def test_PCAView_undercomplete():
+    conv = torch.nn.Conv2d(1, 1, 3)
+    pca_view = PCAView(conv.weight)
+    pca_view.plot_conv()
+    pca_view.plot_variance_ratio()
