@@ -21,7 +21,8 @@ setuptools.setup(
     install_requires=[
         "torch",
         "numpy",
-        "matplotlib"
+        "matplotlib",
+        "scikit-learn"
     ],
     python_requires=">=3.6",
 )

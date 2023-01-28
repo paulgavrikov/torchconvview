@@ -1,1 +1,2 @@
-from .view import plot_conv, plot_conv_rgb
+from .view import *
+from .pca_view import *
