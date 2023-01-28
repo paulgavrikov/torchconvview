@@ -4,6 +4,7 @@ import torch
 import numpy as np
 from typing import Union, Tuple
 import matplotlib.pyplot as plt
+import logging
 
 
 class PCAView:
@@ -17,6 +18,9 @@ class PCAView:
 
         self.kernel_size = (weight.shape[2], weight.shape[3])
 
+        if np.prod(weight[:2]) < np.prod(self.kernel_size):
+            logging.warning("Fitting undercomplete: #Kernels < #Bases. PCA may not work as expected. Augmenting zero bases.")
+
         self.pca = PCA()
         self.pca.fit(weight.reshape(-1, np.prod(self.kernel_size)))
 
@@ -24,7 +28,15 @@ class PCAView:
         """
         Plot the PCA components of the convolutional weight.
         """
-        return plot_conv(self.pca.components_.reshape(*self.kernel_size, *self.kernel_size), img_scale)
+        basis = self.pca.components_
+
+        if self.pca.components_.shape[0] < np.prod(self.kernel_size):
+            missing_dims = np.prod(self.kernel_size) - self.pca.components_.shape[0]
+            basis = np.vstack([basis, np.zeros((missing_dims, np.prod(self.kernel_size)))])
+            
+        basis = basis.reshape(*self.kernel_size, *self.kernel_size)
+
+        return plot_conv(basis, img_scale)
     
     def plot_variance_ratio(self) -> Tuple[plt.Figure, plt.Axes]:
         """
