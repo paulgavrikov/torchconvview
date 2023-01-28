@@ -18,7 +18,7 @@ class PCAView:
 
         self.kernel_size = (weight.shape[2], weight.shape[3])
 
-        if np.prod(weight[:2]) < np.prod(self.kernel_size):
+        if np.prod(weight.shape[:2]) < np.prod(self.kernel_size):
             logging.warning("Fitting undercomplete: #Kernels < #Bases. PCA may not work as expected. Augmenting zero bases.")
 
         self.pca = PCA()
