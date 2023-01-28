@@ -9,7 +9,7 @@
 [cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
 [cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
 
-*A library for PyTorch convolution layer visualizations.*
+*A library for PyTorch convolution layer visualizations via matplotlib plots.*
 
 
 ## Installation
@@ -26,7 +26,53 @@ pip install git+https://github.com/paulgavrikov/torchconvview
 
 ## Usage
 
-TBD
+```python
+from torchconvvision import plot_conv, plot_conv_rgb, PCAView
+import matplotlib.pyplot as plt
+
+# Replace this with your own model. As an example,
+# we will use an ImageNet pretrained ResNet-18.
+import torchvision
+model = torchvision.models.resnet18(pretrained=True)
+```
+### General
+
+All `plot_...` functions return a tuple of the matplotlib figure and axes which allow you to customize the plot to your needs. Also most of these functions accept the `img_scale` argument which allows you to specify a multiplier to the resolution.
+
+### Visualize kernels in the convolution layers
+Just pass the convolution weight as tensor or numpy into `plot_conv` and you'll get a matplotlib figure of the kernels! Each column is one channel/filter, i.e. this stack of kernels generates a feature-map from all input maps.
+```python
+plot_conv(model.layer1[1].conv2.weight)
+plt.show()
+```
+<img src="docs/fig/output_plot_conv.png" width="30%">
+
+### Visualize the first layer
+If you have a convolution layer with RGB input (e.g. often the first layer), the you can visualize entire filters. This function maps all kernels to their respective color. Note that this only work on convolution layers with 3 input channels and only produces meaningfull results if these channels are R, G, B feature-maps!
+
+```python
+plot_conv_rgb(model.conv1.weight)
+plt.show()
+```
+<img src="docs/fig/output_plot_conv_rgb.png" width="100%">
+
+### PCA of convolution weights
+You can also compute the eigenimages/basis vectors of the kernels by using the `PCAView` class. Under the hood it will do a PCA for you. Note, that currently this requires the `scikit-learn` module.
+
+```python
+pcaview = PCAView(model.conv1.weight)
+pcaview.plot_conv()
+plt.show()
+```
+<img src="docs/fig/output_pcaview_plot_conv.png" width="10%">
+
+And to get a handy barplot of the explained variance ratio:
+```python
+pcaview.plot_variance_ratio()
+plt.show()
+```
+<img src="docs/fig/output_pcaview_plot_variance_ratio.png" width="30%">
+
 
 ## Citation
 
