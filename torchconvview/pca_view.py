@@ -27,6 +27,9 @@ class PCAView:
     def plot_conv(self, img_scale: float=1) -> Tuple[plt.Figure, plt.Axes]:
         """
         Plot the PCA components of the convolutional weight.
+
+        :param img_scale: The scale of the image. Allows to resize the resulting plot.    
+        :return: A tuple of the figure and the axis.
         """
         basis = self.pca.components_
 
@@ -41,6 +44,8 @@ class PCAView:
     def plot_variance_ratio(self) -> Tuple[plt.Figure, plt.Axes]:
         """
         Plot the explained variance ratio of the PCA components.
+
+        :return: A tuple of the figure and the axis.
         """
         fig = plt.figure()
         

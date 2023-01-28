@@ -43,6 +43,7 @@ def plot_conv(weight: Union[np.ndarray, torch.Tensor], img_scale: float=1) -> Tu
 
     :param weight: The weight tensor of the convolutional layer.
     :param img_scale: The scale of the image. Allows to resize the resulting plot.    
+    :return: A tuple of the figure and the axis.  
     """
     if type(weight) != np.ndarray:
         weight = weight.detach().cpu().numpy()
