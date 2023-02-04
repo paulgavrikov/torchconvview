@@ -2,6 +2,7 @@ from typing import Union, Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+from .utils import plot_grid
 
 
 def plot_conv_rgb(weight: Union[np.ndarray, torch.Tensor], img_scale: float=1) -> Tuple[plt.Figure, plt.Axes]:
@@ -48,16 +49,4 @@ def plot_conv(weight: Union[np.ndarray, torch.Tensor], img_scale: float=1) -> Tu
     if type(weight) != np.ndarray:
         weight = weight.detach().cpu().numpy()
     
-    t = abs(weight).max()
-    
-    fig = plt.figure(figsize=np.asarray(weight.shape[:2]) * img_scale)
-
-    plt.imshow(np.hstack(np.hstack(weight.transpose(1, 0, 2, 3))), vmin=-t, vmax=t, cmap="seismic")
-    plt.xticks(np.arange(-0.5, (weight.shape[0]-1) * weight.shape[2], weight.shape[2]), [])
-    plt.yticks(np.arange(-0.5, (weight.shape[1]-1) * weight.shape[2], weight.shape[2]), [])
-    for tic in plt.gca().xaxis.get_major_ticks():
-        tic.tick1line.set_visible(False)
-        tic.tick2line.set_visible(False)
-    plt.grid(which="major", color="black", linestyle="-", linewidth=1)
-
-    return fig, plt.gca()
+    return plot_grid(data=weight.transpose(1, 0, 2, 3), img_scale=img_scale)

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="torchconvview",
-    version="0.1.0",
+    version="0.2.0",
     author="Paul Gavrikov",
     author_email="paul.gavrikov@hs-offenburg.de",
     description="A library for PyTorch convolution layer visualizations.",
