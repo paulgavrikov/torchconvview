@@ -1,6 +1,6 @@
 # torchconvview
 
-[![Latest Version](https://img.shields.io/pypi/v/torchconvview.svg?color=green)](https://pypi.python.org/pypi/torchconvquality)
+[![Latest Version](https://img.shields.io/pypi/v/torchconvview.svg?color=green)](https://pypi.python.org/pypi/torchconvview)
 [![pytest](https://github.com/paulgavrikov/torchconvview/actions/workflows/pytest.yml/badge.svg)](https://github.com/paulgavrikov/torchconvview/actions/workflows/pytest.yml)
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
