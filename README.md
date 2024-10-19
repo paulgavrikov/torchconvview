@@ -17,7 +17,7 @@ To install published releases from PyPi execute:
 ```bash
 pip install torchconvview
 ```
-To update torchconvquality to the latest available version, add the `--upgrade` flag to the above commands.
+To update torchconvview to the latest available version, add the `--upgrade` flag to the above commands.
 
 If you want the latest (potentially unstable) features you can also directly install from the github main branch:
 ```bash
@@ -27,7 +27,7 @@ pip install git+https://github.com/paulgavrikov/torchconvview
 ## Usage
 
 ```python
-from torchconvvision import plot_conv, plot_conv_rgb, PCAView
+from torchconvview import plot_conv, plot_conv_rgb, PCAView
 import matplotlib.pyplot as plt
 
 # Replace this with your own model. As an example,
